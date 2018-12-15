@@ -10,7 +10,7 @@
     <Title>Infrastructure layer extensions</Title>
     <Authors>molnarbence</Authors>
     <Description>Helper classes for multi layered application</Description>
-    <PackageLicenseUrl>https://github.com/molnarbence/MbUtils.Extensions/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseFile>https://github.com/molnarbence/MbUtils.Extensions/blob/master/LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/molnarbence/MbUtils.Extensions</PackageProjectUrl>
     <PackageTags>mbutils;extensions;helpers;multilayer;dependency injection</PackageTags>
     <RepositoryUrl>https://github.com/molnarbence/MbUtils.Extensions</RepositoryUrl>
