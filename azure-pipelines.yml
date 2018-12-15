@@ -30,3 +30,8 @@ steps:
 - script: |
     dotnet pack -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory) -p:PackageVersion=$(major).$(minor).$(patch)
   displayName: "dotnet pack"
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: drop
