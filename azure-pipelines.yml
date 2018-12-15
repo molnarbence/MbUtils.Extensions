@@ -27,10 +27,6 @@ steps:
     testRunner: VSTest
     testResultsFiles: '**/*.trx'
 
-- task: NuGetCommand@2
-  inputs:
-    command: pack
-    includeNuGetOrg: true
-    majorVersion: '$(major)'
-    minorVersion: '$(minor)'
-    patchVersion: '$(patch)'
+- script: |
+    dotnet pack --c ${buildConfiguration} -o $(Build.ArtifactStagingDirectory) -p:PackageVersion=${major}.${minor}.${patch}
+  displayName: "dotnet pack"
