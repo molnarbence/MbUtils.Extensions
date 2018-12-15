@@ -28,5 +28,5 @@ steps:
     testResultsFiles: '**/*.trx'
 
 - script: |
-    dotnet pack -c ${buildConfiguration} -o $(Build.ArtifactStagingDirectory) -p:PackageVersion=${major}.${minor}.${patch}
+    dotnet pack -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory) -p:PackageVersion=$(major).$(minor).$(patch)
   displayName: "dotnet pack"
