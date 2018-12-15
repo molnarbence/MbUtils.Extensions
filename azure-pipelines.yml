@@ -30,6 +30,7 @@ steps:
 - task: NuGetCommand@2
   inputs:
     command: pack
+    includeNuGetOrg: true
     majorVersion: '$(major)'
     minorVersion: '$(minor)'
     patchVersion: '$(patch)'
