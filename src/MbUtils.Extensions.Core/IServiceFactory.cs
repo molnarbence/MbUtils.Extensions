@@ -1,7 +1,7 @@
-namespace MbUtils.Extensions.Core
+﻿namespace MbUtils.Extensions.Core
 {
-    public interface IServiceFactory<TService>
-    {
-         TService Get(string name);
-    }
+   public interface IServiceFactory<TService>
+   {
+      TService Get(string name);
+   }
 }
