@@ -2,6 +2,9 @@ name: .NET Core
 
 on: [push]
 
+env:
+  buildConfiguration: Release
+
 jobs:
   build:
 
@@ -14,6 +17,6 @@ jobs:
       with:
         dotnet-version: 3.1.100
     - name: Build with dotnet
-      run: dotnet build --configuration Release
+      run: dotnet build --configuration $buildConfiguration
     - name: Test with dotnet
-      run: dotnet test test/MbUtils.Extensions.Core.Tests --configuration $(buildConfiguration) --logger trx
+      run: dotnet test test/MbUtils.Extensions.Core.Tests --configuration $buildConfiguration --logger trx
