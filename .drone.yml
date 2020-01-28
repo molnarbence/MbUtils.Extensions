@@ -2,9 +2,16 @@ kind: pipeline
 type: docker
 name: default
 
+environment:
+  BUILD_CONFIG: Release
+
 steps:
-- name: restore
-  image: mcr.microsoft.com/dotnet/core/sdk:3.1.100
-  commands:
-  - dotnet restore
-  - dotnet build
+  - name: build
+    image: mcr.microsoft.com/dotnet/core/sdk:3.1.100
+    commands:
+      - echo $BUILD_CONFIG
+      - dotnet restore
+      - dotnet build --no-restore --configuration $BUILD_CONFIG
+      - dotnet test --no-restore --logger trx
+    environment:
+      BUILD_CONFIG: Release
