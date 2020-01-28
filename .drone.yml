@@ -3,8 +3,8 @@ type: docker
 name: default
 
 steps:
-- name: greeting
-  image: golang:1.12
+- name: restore
+  image: mcr.microsoft.com/dotnet/core/sdk:3.1.100
   commands:
-  - go build
-  - go test
+  - dotnet restore
+  - dotnet build
