@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Text;
 using MbUtils.Extensions.CommandLineUtils;
 using Microsoft.Extensions.CommandLineUtils;
+using Microsoft.Extensions.Logging;
 
 namespace TestConsoleApp
 {
    public class BarCommand : SyncCommandBase
    {
-      private readonly Action<string> _logger;
+      private readonly ILogger<BarCommand> _logger;
 
       protected override string CommandName => "bar";
 
-      public BarCommand(Action<string> logger)
+      public BarCommand(ILogger<BarCommand> logger)
       {
          _logger = logger;
       }
@@ -23,7 +24,8 @@ namespace TestConsoleApp
 
          int Ret()
          {
-            bazOption.Values.ForEach(s => _logger($"Baz value: {s}"));
+            bazOption.Values.ForEach(s => _logger.LogInformation($"Baz value: {s}"));
+            // _logger.LogInformation("Bar.baz was called");
             return 0;
          }
 

@@ -14,14 +14,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MbUtils.Extensions.Core.Tes
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0AFAFE37-8CC6-4BBB-830D-63C34B72818B}"
 	ProjectSection(SolutionItems) = preProject
+		.drone.yml = .drone.yml
 		.editorconfig = .editorconfig
 		azure-pipelines.yml = azure-pipelines.yml
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MbUtils.Extensions.CommandLineUtils", "src\MbUtils.Extensions.CommandLineUtils\MbUtils.Extensions.CommandLineUtils.csproj", "{A2FF38C1-BFEB-45F2-80B0-75350818B0FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MbUtils.Extensions.CommandLineUtils", "src\MbUtils.Extensions.CommandLineUtils\MbUtils.Extensions.CommandLineUtils.csproj", "{A2FF38C1-BFEB-45F2-80B0-75350818B0FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleApp", "test\TestConsoleApp\TestConsoleApp.csproj", "{EB35BE0A-D65B-40FD-A461-C8E47024379E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestConsoleApp", "test\TestConsoleApp\TestConsoleApp.csproj", "{EB35BE0A-D65B-40FD-A461-C8E47024379E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,5 +1,7 @@
 ﻿using System;
 using MbUtils.Extensions.CommandLineUtils;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace TestConsoleApp
 {
@@ -7,14 +9,14 @@ namespace TestConsoleApp
    {
       static void Main(string[] args)
       {
-         var wrapper = new CommandLineApplicationWrapper("testapp", "Test app of CommandLineUtils library");
-         var logger = new Action<string>(Console.WriteLine);
-
+         var wrapper = new CommandLineApplicationWrapper(args, "testapp", "Test app of CommandLineUtils library");
          wrapper
-            .SetupCommand(new FooCommand(logger))
-            .SetupCommand(new BarCommand(logger));
+            .AddCommand<FooCommand>()
+            .AddCommand<BarCommand>();
 
-         wrapper.Execute(args);
+         wrapper.HostBuilder.ConfigureServices(services => services.AddSingleton<IQuaxService, QuaxService>());
+
+         wrapper.Execute();
       }
    }
 }
