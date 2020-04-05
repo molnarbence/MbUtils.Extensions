@@ -1,35 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using MbUtils.Extensions.CommandLineUtils;
-using Microsoft.Extensions.CommandLineUtils;
+using McMaster.Extensions.CommandLineUtils;
 using Microsoft.Extensions.Logging;
 
 namespace TestConsoleApp
 {
-   public class BarCommand : SyncCommandBase
+   [Command("bar")]
+   public class BarCommand
    {
       private readonly ILogger<BarCommand> _logger;
 
-      protected override string CommandName => "bar";
+      [Option(CommandOptionType.MultipleValue, Description = "Baz values")]
+      public List<string> Baz { get; set; }
 
       public BarCommand(ILogger<BarCommand> logger)
       {
          _logger = logger;
       }
 
-      protected override Func<int> OnExecute(CommandLineApplication command)
+      public int OnExecute()
       {
-         var bazOption = command.Option("-b|--baz", "Baz value", CommandOptionType.MultipleValue);
-
-         int Ret()
-         {
-            bazOption.Values.ForEach(s => _logger.LogInformation($"Baz value: {s}"));
-            // _logger.LogInformation("Bar.baz was called");
-            return 0;
-         }
-
-         return Ret;
+         Baz.ForEach(s => _logger.LogInformation($"Baz value: {s}"));
+         return 0;
       }
    }
 }

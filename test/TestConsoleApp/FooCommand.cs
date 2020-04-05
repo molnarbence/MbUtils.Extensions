@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Threading.Tasks;
 using MbUtils.Extensions.CommandLineUtils;
-using Microsoft.Extensions.CommandLineUtils;
+using McMaster.Extensions.CommandLineUtils;
 using Microsoft.Extensions.Logging;
 
 namespace TestConsoleApp
 {
-   public class FooCommand : AsyncCommandBase
+   [Command("foo")]
+   public class FooCommand
    {
-      protected override string CommandName => "foo";
       private readonly ILogger<FooCommand> _logger;
       private readonly IQuaxService _quax;
+
+      [Option(Description = "Path to file")]
+      public string Path { get; }
 
       public FooCommand(ILogger<FooCommand> logger, IQuaxService quax)
       {
@@ -18,22 +21,15 @@ namespace TestConsoleApp
          _quax = quax;
       }
 
-      protected override Func<Task<int>> OnExecuteAsync(CommandLineApplication command)
+      public async Task<int> OnExecuteAsync()
       {
-         var pathOption = command.Option("-p|--path", "Path to file", CommandOptionType.SingleValue);
+         _logger.LogInformation("Before delay");
+         await Task.Delay(20);
+         _logger.LogInformation("After delay");
+         _logger.LogInformation($"Path: {Path}");
+         _quax.Add();
 
-         async Task<int> Ret()
-         {
-            _logger.LogInformation("Before delay");
-            await Task.Delay(20);
-            _logger.LogInformation("After delay");
-            _logger.LogInformation($"Path: {pathOption.Value()}");
-            _quax.Add();
-
-            return 0;
-         }
-
-         return Ret;
+         return 0;
       }
    }
 }

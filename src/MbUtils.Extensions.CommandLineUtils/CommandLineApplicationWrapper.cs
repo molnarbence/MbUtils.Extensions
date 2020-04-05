@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using McMaster.Extensions.CommandLineUtils;
 using Microsoft.Extensions.Hosting;
 
@@ -16,15 +17,16 @@ namespace MbUtils.Extensions.CommandLineUtils
          HostBuilder = Host.CreateDefaultBuilder(args);
       }
 
-      public void Execute()
+      public async Task<int> Execute()
       {
          try
          {
-            HostBuilder.RunCommandLineApplicationAsync<TApp>(_args);
+            return await HostBuilder.RunCommandLineApplicationAsync<TApp>(_args);
          }
          catch (CommandParsingException ex)
          {
             Console.WriteLine(ex.Message);
+            return 1;
          }
       }
    }

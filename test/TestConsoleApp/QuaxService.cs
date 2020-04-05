@@ -11,8 +11,9 @@ namespace TestConsoleApp
    }
 
    public class QuaxServiceConfig
-   { 
-
+   {
+      public int Config1 { get; set; }
+      public string Config2 { get; set; }
    }
 
    public class QuaxService : IQuaxService
