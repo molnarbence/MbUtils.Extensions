@@ -10,6 +10,11 @@ namespace TestConsoleApp
       void Add();
    }
 
+   public class QuaxServiceConfig
+   { 
+
+   }
+
    public class QuaxService : IQuaxService
    {
       private readonly ILogger<QuaxService> _logger;
