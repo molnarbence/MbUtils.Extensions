@@ -34,7 +34,7 @@ steps:
 
 
 - task: PublishBuildArtifacts@1
-displayName: 'Publish build artifacts'
+  displayName: 'Publish build artifacts'
   inputs:
     pathtoPublish: '$(Build.ArtifactStagingDirectory)'
     artifactName: drop
