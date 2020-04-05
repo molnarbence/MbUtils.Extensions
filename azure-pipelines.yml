@@ -13,38 +13,46 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  buildVersion: '3.0.0'
+  buildVersion: '3.1.0'
 
 steps:
-- script: | 
-    dotnet build --configuration $(buildConfiguration)
-    dotnet test test/MbUtils.Extensions.Core.Tests --configuration $(buildConfiguration) --logger trx
-  displayName: 'dotnet build&test $(buildConfiguration)'
-
-- task: PublishTestResults@2
-  condition: succeededOrFailed()
-  inputs:
-    testRunner: VSTest
-    testResultsFiles: '**/*.trx'
-
 - script: |
-    dotnet pack -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory) -p:PackageVersion=$(buildVersion)
-  displayName: "dotnet pack"
-  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+    BUILD_V=$(Build.SourceBranch)
+    echo $BUILD_V
+  displayName: 'Test step'
+# - script: | 
+#     dotnet build --configuration $(buildConfiguration)
+#     dotnet test test/MbUtils.Extensions.Core.Tests --configuration $(buildConfiguration) --logger trx
+#   displayName: 'dotnet build&test $(buildConfiguration)'
+
+# - task: PublishTestResults@2
+#   condition: succeededOrFailed()
+#   inputs:
+#     testRunner: VSTest
+#     testResultsFiles: '**/*.trx'
+
+# # Below are for tags branch only
+# # conditioned with: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+
+# - script: |
+#     echo "##vso[task.setvariable variable=tagName]crushed tomatoes"
+#     dotnet pack -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory) -p:PackageVersion=$(buildVersion)
+#   displayName: "dotnet pack"
+#   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
 
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish build artifacts'
-  inputs:
-    pathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    artifactName: drop
-  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+# - task: PublishBuildArtifacts@1
+#   displayName: 'Publish build artifacts'
+#   inputs:
+#     pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+#     artifactName: drop
+#   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
 
 
-- task: NuGetCommand@2
-  displayName: 'nuget push'
-  inputs:
-    command: push
-    nuGetFeedType: external
-    publishFeedCredentials: 'nuget_mb_extensions'
-  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+# - task: NuGetCommand@2
+#   displayName: 'nuget push'
+#   inputs:
+#     command: push
+#     nuGetFeedType: external
+#     publishFeedCredentials: 'nuget_mb_extensions'
+#   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
