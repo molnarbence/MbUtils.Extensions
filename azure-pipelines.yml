@@ -21,11 +21,14 @@ jobs:
     steps:
     - script: |
         VERSION=$(echo $(Build.SourceBranch) | sed -e 's,.*/\(.*\),\1,')
-        echo $VERSION
+        echo 'Last part: $VERSION'
       displayName: 'Test step 1'
+      
     - script: |
         VERSION=$(echo $(Build.SourceBranch) | sed -e 's,.*/\(.*\),\1,')
-        echo $VERSION
+        echo 'Last part: $VERSION'
+        VERSION=$(echo $VERSION | sed -e 's/^v//')
+        echo 'Pure version: $VERSION'
       displayName: 'Test step 2'
       condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags'))
 # - script: | 
