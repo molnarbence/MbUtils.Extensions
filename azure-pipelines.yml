@@ -15,11 +15,17 @@ variables:
   buildConfiguration: 'Release'
   buildVersion: '3.1.0'
 
-steps:
-- script: |
-    BUILD_V=$(Build.SourceBranch)
-    echo $BUILD_V
-  displayName: 'Test step'
+job:
+  steps:
+  - script: |
+      VERSION=$(echo $(Build.SourceBranch) | sed -e 's,.*/\(.*\),\1,')
+      echo $VERSION
+    displayName: 'Test step 1'
+  - script: |
+      VERSION=$(echo $(Build.SourceBranch) | sed -e 's,.*/\(.*\),\1,')
+      echo $VERSION
+    displayName: 'Test step 2'
+    condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags'))
 # - script: | 
 #     dotnet build --configuration $(buildConfiguration)
 #     dotnet test test/MbUtils.Extensions.Core.Tests --configuration $(buildConfiguration) --logger trx
