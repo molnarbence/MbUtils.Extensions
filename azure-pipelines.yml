@@ -1,44 +1,64 @@
-# ASP.NET Core
+﻿# ASP.NET Core
 # Build and test ASP.NET Core projects targeting .NET Core.
 # Add steps that run tests, create a NuGet package, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
-- master
+  branches:
+    include:
+    - '*'
+  tags:
+    include:
+    - '*'
+
+pr: none
 
 pool:
   vmImage: 'Ubuntu-16.04'
 
 variables:
   buildConfiguration: 'Release'
-  major: '2'
-  minor: '2'
-  patch: '0'
+  buildVersion: '3.1.0'
 
-steps:
-- script: | 
-    dotnet build --configuration $(buildConfiguration)
-    dotnet test test/MbUtils.Extensions.Core.Tests --configuration $(buildConfiguration) --logger trx
-  displayName: 'dotnet build&test $(buildConfiguration)'
+jobs:
+  - job: dotnetjob
+    displayName: 'Dotnet job'
+    steps:
+    - script: | 
+        dotnet build --configuration $(buildConfiguration)
+        dotnet test test/MbUtils.Extensions.Core.Tests --configuration $(buildConfiguration) --logger trx
+      displayName: 'dotnet build&test $(buildConfiguration)'
 
-- task: PublishTestResults@2
-  condition: succeededOrFailed()
-  inputs:
-    testRunner: VSTest
-    testResultsFiles: '**/*.trx'
+    - task: PublishTestResults@2
+      displayName: 'Publish test results'
+      condition: succeededOrFailed()
+      inputs:
+        testRunner: VSTest
+        testResultsFiles: '**/*.trx'
 
-- script: |
-    dotnet pack -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory) -p:PackageVersion=$(major).$(minor).$(patch)
-  displayName: "dotnet pack"
+    # Below are for tags branch only
+    # conditioned with: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    artifactName: drop
+    - script: |
+        VERSION=$(echo $(Build.SourceBranch) | sed -e 's,.*/\(.*\),\1,')
+        VERSION=$(echo $VERSION | sed -e 's/^v//')
+        dotnet pack -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory) -p:PackageVersion=$VERSION
+      displayName: "dotnet pack"
+      condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
 
-- task: NuGetCommand@2
-  inputs:
-    command: push
-    nuGetFeedType: external
-    publishFeedCredentials: 'nuget_mb_extensions'
-  displayName: 'nuget push'
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish build artifacts'
+      inputs:
+        pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        artifactName: drop
+      condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+
+
+    - task: NuGetCommand@2
+      displayName: 'nuget push'
+      inputs:
+        command: push
+        nuGetFeedType: external
+        publishFeedCredentials: 'nuget_mb_extensions'
+      condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
