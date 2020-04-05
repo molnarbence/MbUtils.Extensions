@@ -12,7 +12,7 @@
     <Title>Core layer extensions</Title>
     <Authors>molnarbence</Authors>
     <Description>Helper classes for multi layered application</Description>
-    <PackageLicenseUrl>https://github.com/molnarbence/MbUtils.Extensions/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/molnarbence/MbUtils.Extensions</PackageProjectUrl>
     <PackageTags>mbutils;extensions;helpers;multilayer</PackageTags>
     <RepositoryUrl>https://github.com/molnarbence/MbUtils.Extensions</RepositoryUrl>
