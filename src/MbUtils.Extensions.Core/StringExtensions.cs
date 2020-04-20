@@ -1,4 +1,4 @@
-namespace MbUtils.Extensions.Core
+﻿namespace MbUtils.Extensions
 {
    public static class StringExtensions
    {

@@ -19,7 +19,7 @@ namespace TestConsoleApp
             .ConfigureServices(services => services.AddSingleton<IQuaxService, QuaxService>())
             .AddConfig<QuaxServiceConfig>(nameof(QuaxService));
 
-         return wrapper.Execute();
+         return wrapper.ExecuteAsync();
       }
 
       private int OnExecute(CommandLineApplication app, IConsole console)
