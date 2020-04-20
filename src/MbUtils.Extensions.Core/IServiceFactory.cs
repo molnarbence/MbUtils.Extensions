@@ -1,4 +1,4 @@
-﻿namespace MbUtils.Extensions.Core
+﻿namespace MbUtils.Extensions
 {
    public interface IServiceFactory<TService>
    {

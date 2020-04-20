@@ -17,7 +17,7 @@ namespace MbUtils.Extensions.CommandLineUtils
          HostBuilder = Host.CreateDefaultBuilder(args);
       }
 
-      public async Task<int> Execute()
+      public async Task<int> ExecuteAsync()
       {
          try
          {

@@ -17,6 +17,7 @@
     <PackageTags>mbutils;extensions;helpers;multilayer</PackageTags>
     <RepositoryUrl>https://github.com/molnarbence/MbUtils.Extensions</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <RootNamespace>MbUtils.Extensions</RootNamespace>
   </PropertyGroup>
 
 </Project>
