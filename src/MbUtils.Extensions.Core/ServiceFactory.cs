@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace MbUtils.Extensions;
 
-namespace MbUtils.Extensions
+public class ServiceFactory<TService> : Dictionary<string, Func<TService>>, IServiceFactory<TService>
 {
-   public class ServiceFactory<TService> : Dictionary<string, Func<TService>>, IServiceFactory<TService>
+   public TService Get(string name)
    {
-      public TService Get(string name)
-      {
-         return this[name]();
-      }
+      return this[name]();
    }
 }
