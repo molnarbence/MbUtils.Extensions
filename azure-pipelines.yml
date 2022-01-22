@@ -13,7 +13,10 @@ trigger:
 
 pr: none
 
-container: mcr.microsoft.com/dotnet/sdk:5.0
+pool:
+  vmImage: 'ubuntu-latest'
+
+container: mcr.microsoft.com/dotnet/sdk:6.0
 
 variables:
   buildConfiguration: 'Release'
