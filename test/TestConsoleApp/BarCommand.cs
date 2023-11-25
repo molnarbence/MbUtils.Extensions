@@ -5,21 +5,16 @@ using Microsoft.Extensions.Logging;
 namespace TestConsoleApp;
 
 [Command("bar")]
-public class BarCommand
+public class BarCommand(ILogger<BarCommand> logger)
 {
-   private readonly ILogger<BarCommand> _logger;
+   private readonly ILogger<BarCommand> _logger = logger;
 
    [Option(CommandOptionType.MultipleValue, Description = "Baz values")]
    public List<string> Baz { get; set; }
 
-   public BarCommand(ILogger<BarCommand> logger)
-   {
-      _logger = logger;
-   }
-
    public int OnExecute()
    {
-      Baz.ForEach(s => _logger.LogInformation($"Baz value: {s}"));
+      Baz.ForEach(s => _logger.LogInformation("Baz value: {s}", s));
       return 0;
    }
 }

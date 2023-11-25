@@ -14,8 +14,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\MbUtils.Extensions.Core\MbUtils.Extensions.Core.csproj" />
-  </ItemGroup>
-
 </Project>

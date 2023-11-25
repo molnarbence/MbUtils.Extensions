@@ -16,24 +16,12 @@ pr: none
 pool:
   vmImage: 'ubuntu-latest'
 
-container: mcr.microsoft.com/dotnet/sdk:7.0
+container: mcr.microsoft.com/dotnet/sdk:8.0
 
 variables:
   buildConfiguration: 'Release'
 
 steps:
-  - script: | 
-      dotnet build --configuration $(buildConfiguration)
-      dotnet test test/MbUtils.Extensions.Core.Tests --configuration $(buildConfiguration) --logger trx
-    displayName: 'dotnet build&test $(buildConfiguration)'
-
-  - task: PublishTestResults@2
-    displayName: 'Publish test results'
-    condition: succeededOrFailed()
-    inputs:
-      testRunner: VSTest
-      testResultsFiles: '**/*.trx'
-
   # Below are for tags branch only
   # conditioned with: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
 

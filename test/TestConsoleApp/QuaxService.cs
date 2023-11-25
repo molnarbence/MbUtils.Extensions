@@ -13,14 +13,10 @@ public class QuaxServiceConfig
    public string Config2 { get; set; }
 }
 
-public class QuaxService : IQuaxService
+public class QuaxService(ILogger<QuaxService> logger) : IQuaxService
 {
-   private readonly ILogger<QuaxService> _logger;
+   private readonly ILogger<QuaxService> _logger = logger;
 
-   public QuaxService(ILogger<QuaxService> logger)
-   {
-      _logger = logger;
-   }
    public void Add()
    {
       _logger.LogInformation("Added");

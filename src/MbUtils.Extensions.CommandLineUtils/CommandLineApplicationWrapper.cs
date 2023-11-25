@@ -3,17 +3,11 @@ using Microsoft.Extensions.Hosting;
 
 namespace MbUtils.Extensions.CommandLineUtils;
 
-public class CommandLineApplicationWrapper<TApp> where TApp : class
+public class CommandLineApplicationWrapper<TApp>(string[] args) where TApp : class
 {
-   private readonly string[] _args;
+   private readonly string[] _args = args;
 
-   public IHostBuilder HostBuilder { get; }
-
-   public CommandLineApplicationWrapper(string[] args)
-   {
-      _args = args;
-      HostBuilder = Host.CreateDefaultBuilder(args);
-   }
+   public IHostBuilder HostBuilder { get; } = Host.CreateDefaultBuilder(args);
 
    public async Task<int> ExecuteAsync()
    {
