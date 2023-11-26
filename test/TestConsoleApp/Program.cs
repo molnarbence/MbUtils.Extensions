@@ -1,8 +1,8 @@
-﻿using MbUtils.Extensions.CommandLineUtils;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.DependencyInjection;
+﻿using System.Threading.Tasks;
+using MbUtils.Extensions.CommandLineUtils;
 using McMaster.Extensions.CommandLineUtils;
-using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace TestConsoleApp;
 
