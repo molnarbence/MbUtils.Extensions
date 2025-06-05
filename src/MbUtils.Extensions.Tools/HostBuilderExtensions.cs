@@ -17,17 +17,18 @@ public static class HostBuilderExtensions
    }
 
    public static IHostApplicationBuilder AddHomeFolderConfigurationFile(this IHostApplicationBuilder hostBuilder,
-      string folderName)
+      string appConfigurationFolderName)
    {
-      var appDataFolder = Environment.GetEnvironmentVariable("HOME")
+      var userHomeFolder = Environment.GetEnvironmentVariable("HOME")
                        ?? Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
       
-      var appHomeFolderConfigurationFile = Path.Combine(appDataFolder, folderName, "appsettings.json");
+      var appConfigurationFolderPath = Path.Combine(userHomeFolder, appConfigurationFolderName);
+      var appHomeFolderConfigurationFile = Path.Combine(appConfigurationFolderPath, "appsettings.json");
       
       hostBuilder.Configuration
          .AddJsonFile(appHomeFolderConfigurationFile, optional: true)
          .AddInMemoryCollection([
-            new KeyValuePair<string, string?>("AppDataFolder", appDataFolder),
+            new KeyValuePair<string, string?>("AppConfigurationFolderPath", appConfigurationFolderPath),
          ]);
          
       return hostBuilder;
