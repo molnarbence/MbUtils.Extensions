@@ -2,6 +2,7 @@
 
     <PropertyGroup>
         <UserSecretsId>dotnet-TestWorkerService-ffbf2872-2920-48ed-bf9c-f5199d40279e</UserSecretsId>
+        <IsPackable>false</IsPackable>
     </PropertyGroup>
 
     <ItemGroup>
