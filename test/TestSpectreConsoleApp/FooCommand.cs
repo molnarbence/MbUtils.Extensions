@@ -5,9 +5,9 @@ namespace TestSpectreConsoleApp;
 
 public class FooCommand(IBarService barService) : AsyncCommand
 {
-   public override async Task<int> ExecuteAsync(CommandContext context)
+   public override async Task<int> ExecuteAsync(CommandContext context, CancellationToken cancellationToken)
    {
-      await Task.Delay(1000);
+      await Task.Delay(1000, cancellationToken);
 
       var qux = barService.GetQux();
       
