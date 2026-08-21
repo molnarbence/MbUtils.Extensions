@@ -16,7 +16,7 @@ jobs:
       id-token: write
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v7
     - name: Pack
       run: | 
         VERSION=$(echo ${GITHUB_REF##*/})
