@@ -22,12 +22,6 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 
-      # SonarScanner for .NET ignores sonar-project.properties, so settings are passed as /d: args.
-      - name: Install SonarScanner
-        run: |
-          dotnet tool install --global dotnet-sonarscanner
-          echo "$HOME/.dotnet/tools" >> "$GITHUB_PATH"
-
       - name: Begin analysis
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
