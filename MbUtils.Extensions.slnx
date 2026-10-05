@@ -22,6 +22,7 @@
     </Project>
   </Folder>
   <Folder Name="/test/">
+    <Project Path="test/MbUtils.Extensions.Tests/MbUtils.Extensions.Tests.csproj" />
     <Project Path="test/TestWorkerService/TestWorkerService.csproj" />
     <Project Path="test\TestSpectreConsoleApp\TestSpectreConsoleApp.csproj" Type="Classic C#">
       <Configuration Solution="Debug|x64" Project="Debug|Any CPU" />
