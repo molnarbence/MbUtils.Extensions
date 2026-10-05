@@ -14,9 +14,9 @@
         <Authors>molnarbence</Authors>
         <Description>Helper classes for Spectre Console applications</Description>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageProjectUrl>https://github.com/molnarbence/MbUtils.Extensions</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/mb-dot-dev/MbUtils.Extensions</PackageProjectUrl>
         <PackageTags>mbutils;extensions;helpers;spectre-console</PackageTags>
-        <RepositoryUrl>https://github.com/molnarbence/MbUtils.Extensions</RepositoryUrl>
+        <RepositoryUrl>https://github.com/mb-dot-dev/MbUtils.Extensions</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
     </PropertyGroup>
 
